@@ -1,42 +1,42 @@
 /* ===================================== */
-/* ROOT COLORS - PINK + WHITE THEME */
+/* ROOT COLORS - LIGHTER PINK + WHITE THEME */
 /* ===================================== */
 
 :root{
-    --bg-start: #fff5f8;
-    --bg-mid: #ffe4ed;
-    --bg-end: #ffd6e4;
+    --bg-start: #fff9fb;
+    --bg-mid: #fff0f5;
+    --bg-end: #ffe6ef;
     --text: #4a2b36;
-    --text-soft: #7a5a66;
-    --card: rgba(255,255,255,.9);
-    --card-border: rgba(231,112,157,0.2);
-    --navbar-bg: rgba(255,255,255,.85);
-    --gradient1-start: #ff6b9d;
-    --gradient1-end: #ff8fb3;
-    --gradient2-start: #ff4d7a;
-    --gradient2-end: #ff2e62;
-    --shadow: rgba(231,112,157,.2);
-    --btn-hover: rgba(231,112,157,.15);
-    --accent-glow: #ff6b9d;
+    --text-soft: #8b6b78;
+    --card: rgba(255,255,255,.95);
+    --card-border: rgba(255,182,193,0.4);
+    --navbar-bg: rgba(255,255,255,.9);
+    --gradient1-start: #ff85b3;
+    --gradient1-end: #ffa5c5;
+    --gradient2-start: #ff6b9d;
+    --gradient2-end: #ff4d82;
+    --shadow: rgba(255,107,157,.15);
+    --btn-hover: rgba(255,107,157,.1);
+    --accent-glow: #ff85b3;
 }
 
-/* DARK MODE - Dark pink/purple theme */
+/* DARK MODE - Darker pink/purple theme (lighter than before) */
 body.dark-mode{
-    --bg-start: #1a0f14;
-    --bg-mid: #2d1a24;
-    --bg-end: #3d1f2e;
+    --bg-start: #2a1a24;
+    --bg-mid: #3d2a36;
+    --bg-end: #4a3542;
     --text: #ffe4ed;
-    --text-soft: #d4a5b8;
-    --card: rgba(45,26,36,.8);
-    --card-border: rgba(231,112,157,.3);
-    --navbar-bg: rgba(26,15,20,.85);
-    --gradient1-start: #c44d7a;
-    --gradient1-end: #e06b96;
-    --gradient2-start: #a83262;
-    --gradient2-end: #c44d7a;
-    --shadow: rgba(231,112,157,.25);
-    --btn-hover: rgba(231,112,157,.2);
-    --accent-glow: #e06b96;
+    --text-soft: #e0b8cc;
+    --card: rgba(61,42,54,.85);
+    --card-border: rgba(255,107,157,.3);
+    --navbar-bg: rgba(42,26,36,.9);
+    --gradient1-start: #ff9bc2;
+    --gradient1-end: #ffb8d4;
+    --gradient2-start: #ff7aaa;
+    --gradient2-end: #ff5a99;
+    --shadow: rgba(255,107,157,.25);
+    --btn-hover: rgba(255,107,157,.2);
+    --accent-glow: #ff9bc2;
 }
 
 *{
@@ -82,7 +82,7 @@ body.dark-mode::before {
     position:absolute;
     border-radius:50%;
     filter:blur(140px);
-    opacity:0.55;
+    opacity:0.45;
     transition: background 0.5s cubic-bezier(0.2, 0.95, 0.3, 1.05), transform 0.4s ease;
     animation: floatOrb 18s infinite alternate ease-in-out;
 }
@@ -107,7 +107,7 @@ body.dark-mode::before {
     background: var(--gradient2-end);
     bottom:15%;
     left:15%;
-    opacity:0.35;
+    opacity:0.25;
     animation-delay: -10s;
 }
 
@@ -150,6 +150,14 @@ nav{
     font-size: 1.2rem;
     letter-spacing: -0.2px;
     flex-shrink: 0;
+}
+
+.logo img{
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px var(--shadow));
+    transition: filter 0.3s ease;
 }
 
 .logo .logo-text{
@@ -242,6 +250,7 @@ nav{
     .nav-links { gap: 18px; }
     .nav-right { gap: 16px; }
     .logo .logo-text { font-size: 0.9rem; }
+    .logo img { width: 38px; height: 38px; }
 }
 @media (max-width: 550px) {
     .nav-links { gap: 12px; }
@@ -264,8 +273,21 @@ nav{
 .hero-content{
     max-width: 1000px;
 }
+.hero-logo img{
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 28px;
+    animation: logoFloat 4.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 28px var(--shadow));
+    transition: filter 0.3s ease;
+}
+@keyframes logoFloat{
+    0%,100%{ transform:translateY(0px);}
+    50%{ transform:translateY(-14px);}
+}
 .hero h1{
-    font-size: 5rem;
+    font-size: 4.5rem;
     line-height: 1.1;
     margin-bottom: 22px;
     background: linear-gradient(115deg, 
@@ -321,10 +343,10 @@ nav{
     transition: stroke 0.2s ease;
 }
 .btn-primary{
-    background: linear-gradient(110deg, rgba(231,112,157,0.18), rgba(255,107,157,0.08));
+    background: linear-gradient(110deg, rgba(255,107,157,0.12), rgba(255,133,179,0.08));
 }
 .btn-primary:hover{
-    background: linear-gradient(110deg, rgba(231,112,157,0.3), rgba(255,107,157,0.15));
+    background: linear-gradient(110deg, rgba(255,107,157,0.22), rgba(255,133,179,0.12));
 }
 .btn:hover{
     transform: translateY(-5px);
@@ -442,7 +464,7 @@ section{
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
     padding: 24px;
 }
 .gallery-overlay h3{
@@ -452,7 +474,7 @@ section{
 }
 .gallery-overlay p{
     font-size: 0.85rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.85);
 }
 
 /* FAQ Section */
@@ -520,7 +542,7 @@ section{
 /* Footer */
 .cool-footer{
     margin-top: 50px;
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.1);
     backdrop-filter: blur(20px);
     border-top: 1px solid var(--card-border);
     padding: 3rem 2rem 1.5rem;
@@ -622,9 +644,9 @@ section{
     transform: translate(-50%, -50%);
     animation: glowPop 0.85s ease-out forwards;
     z-index: 10000;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 @keyframes glowPop{
-    0%{ width: 0px; height: 0px; opacity: 0.7; }
+    0%{ width: 0px; height: 0px; opacity: 0.6; }
     100%{ width: 500px; height: 500px; opacity: 0; }
-}
+    }
