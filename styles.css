@@ -579,7 +579,10 @@ section{
     font-weight: 500;
 }
 
-/* Clean Footer */
+/* ===================================== */
+/* CLEAN FOOTER - UPDATED WITH THEME COLORS */
+/* ===================================== */
+
 footer{
     margin-top: 40px;
     background: var(--card);
@@ -630,6 +633,8 @@ footer{
 .footer-col a:hover{
     color: var(--gradient2-start);
 }
+
+/* Social icons - matching theme colors */
 .social-links{
     display: flex;
     gap: 12px;
@@ -638,27 +643,26 @@ footer{
 .social-links a{
     width: 38px;
     height: 38px;
-    background: var(--btn-hover);
+    background: linear-gradient(135deg, var(--gradient1-start), var(--gradient2-start));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(255,107,157,0.2);
 }
 .social-links a svg{
     width: 18px;
     height: 18px;
-    stroke: var(--text);
-    stroke-width: 1.7;
+    stroke: white;
+    stroke-width: 1.8;
     fill: none;
 }
 .social-links a:hover{
-    transform: translateY(-3px);
-    background: var(--gradient2-start);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(255,107,157,0.35);
 }
-.social-links a:hover svg{
-    stroke: white;
-}
+
 .footer-bottom{
     text-align: center;
     margin-top: 40px;
@@ -712,4 +716,4 @@ footer{
 @keyframes glowPop{
     0%{ width: 0px; height: 0px; opacity: 0.5; }
     100%{ width: 400px; height: 400px; opacity: 0; }
-    }
+}
