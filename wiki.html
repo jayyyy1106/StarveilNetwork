@@ -249,7 +249,7 @@
     <div class="glow-sphere three"></div>
 </div>
 
-<!-- NAVBAR -->
+<!-- NAVBAR with hamburger menu -->
 <nav>
     <div class="nav-container">
         <div class="logo">
@@ -263,6 +263,11 @@
             <a href="wiki.html">Wiki</a>
             <a href="index.html#community">Community</a>
         </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <button class="theme-toggle" id="themeToggleBtn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="5"/>
@@ -271,6 +276,9 @@
         </button>
     </div>
 </nav>
+
+<!-- Mobile menu overlay -->
+<div class="menu-overlay" id="menuOverlay"></div>
 
 <main>
     <!-- Wiki Hero -->
@@ -452,10 +460,45 @@
         card.addEventListener('click', () => {
             const category = card.getAttribute('data-category');
             renderArticles(category.replace('-', ' '));
-            
-            // Scroll to articles section
             document.querySelector('.wiki-articles').scrollIntoView({ behavior: 'smooth' });
         });
+    });
+    
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+        navLinks.classList.add('active');
+        menuToggle.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', closeMenu);
     });
     
     // Theme toggle
@@ -489,27 +532,4 @@
         glow.style.left = e.clientX + 'px';
         glow.style.top = e.clientY + 'px';
         document.body.appendChild(glow);
-        setTimeout(() => glow.remove(), 700);
-    }
-    
-    document.querySelectorAll('.wiki-category-card, .article-card, .btn, .theme-toggle, .social-links a, .footer-col a, .nav-links a, .featured-btn').forEach(el => {
-        if (el) el.addEventListener('click', createGlow);
-    });
-
-    // Fade on scroll
-    const fadeElements = document.querySelectorAll('.fade-on-scroll');
-    function checkFade() {
-        fadeElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 80 && rect.bottom > 0) {
-                el.classList.add('fade-in-view');
-            }
-        });
-    }
-    checkFade();
-    window.addEventListener('scroll', checkFade);
-    window.addEventListener('resize', checkFade);
-</script>
-
-</body>
-</html>
+ 
