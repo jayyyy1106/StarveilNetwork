@@ -22,7 +22,7 @@
     <div class="glow-sphere three"></div>
 </div>
 
-<!-- NAVBAR with hamburger menu -->
+<!-- NAVBAR -->
 <nav>
     <div class="nav-container">
         <div class="logo">
@@ -51,9 +51,6 @@
         </div>
     </div>
 </nav>
-
-<!-- Mobile menu overlay -->
-<div class="menu-overlay" id="menuOverlay"></div>
 
 <main>
     <!-- HERO -->
@@ -226,6 +223,7 @@
                 <a href="#gallery">Gallery</a>
                 <a href="#faq">FAQ</a>
                 <a href="wiki.html">Wiki</a>
+                <a href="#community">Community</a>
             </div>
             <div class="footer-col">
                 <h4>Resources</h4>
@@ -245,22 +243,19 @@
 </footer>
 
 <script>
-    // Mobile menu toggle
+    // Mobile menu toggle (bottom drawer)
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
-    const menuOverlay = document.getElementById('menuOverlay');
 
     function closeMenu() {
         navLinks.classList.remove('active');
         menuToggle.classList.remove('active');
-        menuOverlay.classList.remove('active');
         document.body.style.overflow = '';
     }
 
     function openMenu() {
         navLinks.classList.add('active');
         menuToggle.classList.add('active');
-        menuOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
 
@@ -272,10 +267,6 @@
                 openMenu();
             }
         });
-    }
-
-    if (menuOverlay) {
-        menuOverlay.addEventListener('click', closeMenu);
     }
 
     // Close menu when a link is clicked
@@ -315,7 +306,7 @@
         });
     });
 
-    // Click glow
+    // Click glow effect
     function createGlow(e) {
         const glow = document.createElement('div');
         glow.className = 'click-glow';
@@ -326,7 +317,7 @@
     }
     
     document.querySelectorAll('.feature-card, .gallery-item, .btn, .theme-toggle, .community-card, .footer-col a, .social-links a, .nav-links a, .faq-question, .menu-toggle').forEach(el => {
-        el.addEventListener('click', createGlow);
+        if (el) el.addEventListener('click', createGlow);
     });
 
     // Fade on scroll
@@ -345,4 +336,4 @@
 </script>
 
 </body>
-</html>
+                </html>
