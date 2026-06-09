@@ -15,9 +15,10 @@
 
 <!-- CRITICAL: Theme script runs immediately to prevent white flash -->
 <script>
-    // This script runs before page renders to set correct theme immediately
     (function() {
-        const savedTheme = localStorage.getItem('theme');
+        // Check if user has a saved preference
+        const savedTheme = localStorage.getItem('starveil-theme');
+        
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark-mode');
             document.body.classList.add('dark-mode');
@@ -25,7 +26,7 @@
             document.documentElement.classList.remove('dark-mode');
             document.body.classList.remove('dark-mode');
         } else {
-            // No saved preference - check system preference
+            // No saved preference - use system preference
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (systemPrefersDark) {
                 document.documentElement.classList.add('dark-mode');
@@ -285,10 +286,10 @@
     function setTheme(isDark) {
         if (isDark) {
             document.body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('starveil-theme', 'dark');
         } else {
             document.body.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('starveil-theme', 'light');
         }
         updateButtonIcon();
     }
@@ -296,14 +297,7 @@
     // Initialize button icon
     updateButtonIcon();
     
-    // Listen for system preference changes (only if no saved preference)
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-            setTheme(e.matches);
-        }
-    });
-    
-    // Manual toggle
+    // Manual toggle - saves user preference
     themeBtn.addEventListener('click', () => {
         const isDark = document.body.classList.contains('dark-mode');
         setTheme(!isDark);
