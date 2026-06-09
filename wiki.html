@@ -58,7 +58,7 @@
     box-shadow: 0 0 0 3px rgba(255,107,157,0.1);
 }
 
-/* Category buttons - simple pill buttons */
+/* Category buttons */
 .wiki-categories{
     display: flex;
     flex-wrap: wrap;
@@ -188,7 +188,6 @@
 </nav>
 
 <main>
-    <!-- Wiki Hero -->
     <section class="wiki-hero fade-on-scroll">
         <div class="hero-content">
             <h1>✦ Starveil Wiki</h1>
@@ -200,7 +199,6 @@
     </section>
 
     <div class="container">
-        <!-- Category Buttons -->
         <div class="wiki-categories fade-on-scroll" id="categoryButtons">
             <button class="category-btn active" data-category="all">All</button>
             <button class="category-btn" data-category="getting-started">🌟 Getting Started</button>
@@ -211,14 +209,12 @@
             <button class="category-btn" data-category="commands">⌨️ Commands</button>
         </div>
 
-        <!-- Articles Grid -->
         <div class="wiki-articles fade-on-scroll">
             <div class="articles-grid" id="articlesGrid"></div>
         </div>
     </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
     <div class="footer-inner">
         <div class="footer-brand">
@@ -285,12 +281,10 @@
         
         let filtered = articlesData;
         
-        // Filter by category
         if (currentCategory !== "all") {
             filtered = filtered.filter(article => article.category === currentCategory);
         }
         
-        // Filter by search
         if (currentSearch) {
             filtered = filtered.filter(article => 
                 article.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
@@ -312,7 +306,6 @@
             </div>
         `).join('');
         
-        // Re-trigger fade animation
         const newFadeElements = document.querySelectorAll('.fade-on-scroll');
         newFadeElements.forEach(el => {
             const rect = el.getBoundingClientRect();
@@ -322,10 +315,8 @@
         });
     }
     
-    // Initial render
     renderArticles();
     
-    // Search functionality
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -334,21 +325,17 @@
         });
     }
     
-    // Category buttons
     const categoryBtns = document.querySelectorAll('.category-btn');
     categoryBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active class
             categoryBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // Update current category
             currentCategory = btn.getAttribute('data-category');
             renderArticles();
         });
     });
     
-    // Mobile menu toggle
+    // Mobile dropdown menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -365,7 +352,8 @@
     }
 
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (navLinks.classList.contains('active')) {
                 closeMenu();
             } else {
@@ -376,6 +364,14 @@
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        }
     });
     
     // Theme toggle
@@ -402,7 +398,6 @@
         setTheme(!document.body.classList.contains('dark-mode'));
     });
 
-    // Click glow
     function createGlow(e) {
         const glow = document.createElement('div');
         glow.className = 'click-glow';
@@ -416,7 +411,6 @@
         if (el) el.addEventListener('click', createGlow);
     });
 
-    // Fade on scroll
     const fadeElements = document.querySelectorAll('.fade-on-scroll');
     function checkFade() {
         fadeElements.forEach(el => {
