@@ -13,6 +13,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
+<!-- CRITICAL: Theme script runs immediately to prevent white flash -->
+<script>
+    (function() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+        } else if (savedTheme === 'light') {
+            document.documentElement.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
+        } else {
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (systemPrefersDark) {
+                document.documentElement.classList.add('dark-mode');
+                document.body.classList.add('dark-mode');
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                document.body.classList.remove('dark-mode');
+            }
+        }
+    })();
+</script>
+
 <style>
 /* Wiki page specific styles */
 .wiki-hero{
@@ -336,33 +359,33 @@
         });
     });
     
-    // Theme toggle - respects system preference initially, then manual override
+    // Theme toggle - with correct button icon
     const themeBtn = document.getElementById('themeToggleBtn');
     const sunSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
     const moonSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
 
-    const savedTheme = localStorage.getItem('theme');
-    
+    function updateButtonIcon() {
+        const isDark = document.body.classList.contains('dark-mode');
+        if (isDark) {
+            themeBtn.innerHTML = sunSvg;
+        } else {
+            themeBtn.innerHTML = moonSvg;
+        }
+    }
+
     function setTheme(isDark) {
         if (isDark) {
             document.body.classList.add('dark-mode');
-            themeBtn.innerHTML = sunSvg;
             localStorage.setItem('theme', 'dark');
         } else {
             document.body.classList.remove('dark-mode');
-            themeBtn.innerHTML = moonSvg;
             localStorage.setItem('theme', 'light');
         }
+        updateButtonIcon();
     }
     
-    if (savedTheme === 'dark') {
-        setTheme(true);
-    } else if (savedTheme === 'light') {
-        setTheme(false);
-    } else {
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setTheme(systemPrefersDark);
-    }
+    // Initialize button icon
+    updateButtonIcon();
     
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
         if (!localStorage.getItem('theme')) {
