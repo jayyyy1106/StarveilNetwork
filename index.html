@@ -243,7 +243,7 @@
 </footer>
 
 <script>
-    // Mobile menu toggle (bottom drawer)
+    // Mobile dropdown menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -260,7 +260,8 @@
     }
 
     if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             if (navLinks.classList.contains('active')) {
                 closeMenu();
             } else {
@@ -269,9 +270,18 @@
         });
     }
 
-    // Close menu when a link is clicked
+    // Close menu when clicking a link
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', closeMenu);
+    });
+
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        }
     });
 
     // Theme toggle
@@ -336,4 +346,4 @@
 </script>
 
 </body>
-                </html>
+</html>
