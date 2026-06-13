@@ -1,9 +1,9 @@
 /* ===================================== */
 /* STARVEIL NETWORK - MAIN STYLES */
-/* Darker Purple/Blue Theme */
+/* Dark Purple/Blue Theme Only */
 /* ===================================== */
 
-/* ROOT COLORS */
+/* ROOT COLORS - Fixed Dark Theme */
 :root {
     --bg-start: #1a1a2e;
     --bg-mid: #16213e;
@@ -23,26 +23,6 @@
     --dropdown-bg: rgba(20,20,40,.95);
 }
 
-/* LIGHT MODE */
-body.light-mode {
-    --bg-start: #2d2d44;
-    --bg-mid: #252542;
-    --bg-end: #1a1a35;
-    --text: #ffffff;
-    --text-soft: #d0d0e8;
-    --text-light: #a0a0c0;
-    --card: rgba(45,45,68,.85);
-    --card-border: rgba(157,127,191,0.35);
-    --navbar-bg: rgba(35,35,55,.92);
-    --gradient-purple: linear-gradient(135deg, #bea5d5, #9d7fbf, #776fa3);
-    --gradient-purple-light: linear-gradient(135deg, #dacfe8, #bea5d5, #9d7fbf);
-    --shadow: rgba(0,0,0,0.25);
-    --shadow-hover: rgba(0,0,0,0.35);
-    --btn-hover: rgba(190,165,213,0.2);
-    --accent-glow: #bea5d5;
-    --dropdown-bg: rgba(35,35,55,.95);
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -57,7 +37,6 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--text);
     overflow-x: hidden;
-    transition: background 0.4s ease, color 0.3s ease;
 }
 
 /* Darker gradient background */
@@ -68,10 +47,6 @@ body::before {
     background: radial-gradient(ellipse at 30% 40%, var(--bg-mid) 0%, var(--bg-start) 50%, var(--bg-end) 100%);
     z-index: -6;
     transition: background 0.5s ease;
-}
-
-body.light-mode::before {
-    background: radial-gradient(ellipse at 70% 30%, var(--bg-mid) 0%, var(--bg-start) 50%, var(--bg-end) 100%);
 }
 
 /* Loading Screen */
@@ -151,18 +126,6 @@ body.light-mode::before {
     left: 10%;
     opacity: 0.2;
     animation-delay: -12s;
-}
-
-body.light-mode .glow-sphere.one {
-    background: #bea5d5;
-}
-
-body.light-mode .glow-sphere.two {
-    background: #9d7fbf;
-}
-
-body.light-mode .glow-sphere.three {
-    background: #776fa3;
 }
 
 @keyframes floatOrb {
@@ -263,32 +226,6 @@ nav {
     transition: all 0.3s ease;
 }
 
-.theme-toggle {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--card-border);
-    background: var(--card);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.theme-toggle svg {
-    width: 18px;
-    height: 18px;
-    stroke: var(--text);
-    stroke-width: 1.8;
-    fill: none;
-}
-
-.theme-toggle:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px var(--shadow);
-}
-
 /* Mobile menu */
 @media (max-width: 768px) {
     .menu-toggle {
@@ -380,9 +317,6 @@ nav {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    /* Better image rendering for large images */
-    image-rendering: auto;
-    image-rendering: crisp-edges;
 }
 
 @keyframes gentleFloat {
@@ -883,4 +817,4 @@ footer {
 @keyframes glowPop {
     0% { width: 0px; height: 0px; opacity: 0.5; }
     100% { width: 400px; height: 400px; opacity: 0; }
-    }
+                          }
