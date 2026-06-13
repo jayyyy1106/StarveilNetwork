@@ -13,10 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
-<!-- CRITICAL: Theme script runs immediately to prevent white flash -->
+<!-- CRITICAL: Theme script runs immediately to prevent white flash AND lock theme -->
 <script>
     (function() {
-        // Check if user has a saved preference
+        // ALWAYS use saved preference - NEVER override
         const savedTheme = localStorage.getItem('starveil-theme');
         
         if (savedTheme === 'dark') {
@@ -26,18 +26,96 @@
             document.documentElement.classList.remove('dark-mode');
             document.body.classList.remove('dark-mode');
         } else {
-            // No saved preference - use system preference
+            // First time visitor - use system preference and SAVE it
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (systemPrefersDark) {
                 document.documentElement.classList.add('dark-mode');
                 document.body.classList.add('dark-mode');
+                localStorage.setItem('starveil-theme', 'dark');
             } else {
                 document.documentElement.classList.remove('dark-mode');
                 document.body.classList.remove('dark-mode');
+                localStorage.setItem('starveil-theme', 'light');
             }
         }
     })();
 </script>
+
+<style>
+/* Additional gradient overrides */
+:root {
+    --bg-start: #ffffff;
+    --bg-mid: #efe9f4;
+    --bg-end: #dacfe8;
+}
+
+body.dark-mode {
+    --bg-start: #2d475c;
+    --bg-mid: #253d48;
+    --bg-end: #182b2e;
+}
+
+/* Gradient text overrides */
+.hero h1,
+.section-header h2,
+.footer-brand h3,
+.logo .logo-text {
+    background: linear-gradient(135deg, #bea5d5, #776fa3, #455a7d);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.dark-mode .hero h1,
+body.dark-mode .section-header h2,
+body.dark-mode .footer-brand h3,
+body.dark-mode .logo .logo-text {
+    background: linear-gradient(135deg, #cbb6de, #9d7fbf, #536088);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Feature icon gradients */
+.feature-icon,
+.community-icon,
+.wiki-category-icon {
+    background: linear-gradient(145deg, #bea5d5, #776fa3);
+}
+
+body.dark-mode .feature-icon,
+body.dark-mode .community-icon,
+body.dark-mode .wiki-category-icon {
+    background: linear-gradient(145deg, #9d7fbf, #536088);
+}
+
+/* Button gradients */
+.btn-primary {
+    background: linear-gradient(135deg, #bea5d5, #776fa3);
+}
+
+body.dark-mode .btn-primary {
+    background: linear-gradient(135deg, #9d7fbf, #536088);
+}
+
+/* Category button active */
+.category-btn.active {
+    background: linear-gradient(135deg, #bea5d5, #776fa3);
+}
+
+body.dark-mode .category-btn.active {
+    background: linear-gradient(135deg, #9d7fbf, #536088);
+}
+
+/* Social links gradient */
+.social-links a {
+    background: linear-gradient(135deg, #bea5d5, #776fa3);
+}
+
+body.dark-mode .social-links a {
+    background: linear-gradient(135deg, #9d7fbf, #536088);
+}
+</style>
 
 </head>
 <body>
@@ -60,6 +138,7 @@
             <a href="#gallery">Gallery</a>
             <a href="#faq">FAQ</a>
             <a href="wiki.html">Wiki</a>
+            <a href="rank-tag-generator.html">Tag Generator</a>
             <a href="#community">Community</a>
         </div>
         <div class="right-buttons">
@@ -249,6 +328,7 @@
                 <a href="#gallery">Gallery</a>
                 <a href="#faq">FAQ</a>
                 <a href="wiki.html">Wiki</a>
+                <a href="rank-tag-generator.html">Tag Generator</a>
                 <a href="#community">Community</a>
             </div>
             <div class="footer-col">
@@ -294,10 +374,10 @@
         updateButtonIcon();
     }
     
-    // Initialize button icon
+    // Initialize button icon (theme already set by head script)
     updateButtonIcon();
     
-    // Manual toggle - saves user preference
+    // Manual toggle - saves user preference and NEVER resets
     themeBtn.addEventListener('click', () => {
         const isDark = document.body.classList.contains('dark-mode');
         setTheme(!isDark);
@@ -362,24 +442,4 @@
         setTimeout(() => glow.remove(), 700);
     }
     
-    document.querySelectorAll('.feature-card, .gallery-item, .btn, .theme-toggle, .social-links a, .footer-col a, .nav-links a, .faq-question, .menu-toggle, .community-card').forEach(el => {
-        if (el) el.addEventListener('click', createGlow);
-    });
-
-    // Fade on scroll
-    const fadeElements = document.querySelectorAll('.fade-on-scroll');
-    function checkFade() {
-        fadeElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 80 && rect.bottom > 0) {
-                el.classList.add('fade-in-view');
-            }
-        });
-    }
-    checkFade();
-    window.addEventListener('scroll', checkFade);
-    window.addEventListener('resize', checkFade);
-</script>
-
-</body>
-</html>
+    document.querySelectorAll('.feature-card, .gallery-item, .btn, .theme-toggle, .social-links a, .footer-col a, .nav-links a, .faq-question, .menu-toggle, .community-ca
