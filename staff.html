@@ -19,10 +19,14 @@
 :root{
     --rank-founder-start: #bea5d5;
     --rank-founder-end: #9d7fbf;
-    --rank-executive-start: #9d7fbf;
-    --rank-executive-end: #776fa3;
-    --rank-head-start: #776fa3;
-    --rank-head-end: #536088;
+    --rank-cofounder-start: #9d7fbf;
+    --rank-cofounder-end: #776fa3;
+    --rank-executive-start: #776fa3;
+    --rank-executive-end: #636895;
+    --rank-helper-start: #536088;
+    --rank-helper-end: #455a7d;
+    --rank-tester-start: #395472;
+    --rank-tester-end: #334d66;
 }
 
 .hero{
@@ -123,14 +127,24 @@
     border-color: #bea5d5;
 }
 
-.staff-card[data-rank="Executive"] .head-bubble{
+.staff-card[data-rank="Co-Founder"] .head-bubble{
     box-shadow: 0 0 35px rgba(157,127,191,0.5);
     border-color: #9d7fbf;
 }
 
-.staff-card[data-rank="Head Management"] .head-bubble{
+.staff-card[data-rank="Executive"] .head-bubble{
     box-shadow: 0 0 35px rgba(119,111,163,0.5);
     border-color: #776fa3;
+}
+
+.staff-card[data-rank="Helper"] .head-bubble{
+    box-shadow: 0 0 35px rgba(83,96,136,0.5);
+    border-color: #536088;
+}
+
+.staff-card[data-rank="Tester"] .head-bubble{
+    box-shadow: 0 0 35px rgba(57,84,114,0.5);
+    border-color: #395472;
 }
 
 .staff-info{
@@ -163,12 +177,20 @@
     background: linear-gradient(135deg, #bea5d5, #9d7fbf);
     color: #1a1a2e;
 }
-.rank-badge-executive{
+.rank-badge-cofounder{
     background: linear-gradient(135deg, #9d7fbf, #776fa3);
     color: white;
 }
-.rank-badge-head{
-    background: linear-gradient(135deg, #776fa3, #536088);
+.rank-badge-executive{
+    background: linear-gradient(135deg, #776fa3, #636895);
+    color: white;
+}
+.rank-badge-helper{
+    background: linear-gradient(135deg, #536088, #455a7d);
+    color: white;
+}
+.rank-badge-tester{
+    background: linear-gradient(135deg, #395472, #334d66);
     color: white;
 }
 
@@ -239,8 +261,8 @@
 <main>
     <section class="hero fade-on-scroll">
         <div class="hero-content">
-            <h1>✦ Leadership Team</h1>
-            <p>The dedicated individuals guiding Starveil Network to greatness.</p>
+            <h1>✦ Starveil Team</h1>
+            <p>The dedicated individuals making Starveil Network shine.</p>
         </div>
     </section>
 
@@ -295,25 +317,52 @@
     // Staff Data with Minecraft usernames for 2D heads
     const staffMembers = [
         { 
-            name: "Ange1XDem0n", 
+            name: "ItsMarcusX", 
             rank: "Founder", 
-            description: "Creator & Visionary behind Starveil Network. Leading the server with passion and dedication since day one.",
-            minecraftUsername: "Ange1XDem0n",
-            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15 9H22L16 14L19 21L12 17L5 21L8 14L2 9H9L12 2Z"/></svg>`
+            description: "Founder & Visionary behind Starveil Network. Leading the server with passion and dedication since day one.",
+            minecraftUsername: "ItsMarcusX",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15 9H22L16 14L19 21L12 17L5 21L8 14L2 9H9L12 2Z"/></svg>`,
+            rankClass: "rank-badge-founder"
         },
         { 
             name: "its_apex", 
-            rank: "Executive", 
-            description: "Executive Director managing operations, community growth, and strategic partnerships.",
+            rank: "Co-Founder", 
+            description: "Co-Founder managing operations, community growth, and strategic partnerships.",
             minecraftUsername: "atrillun",
-            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>`
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>`,
+            rankClass: "rank-badge-cofounder"
         },
         { 
-            name: "abwyss", 
-            rank: "Head Management", 
-            description: "Head of Management overseeing staff, player relations, and server quality assurance.",
+            name: "abwyss (Tina/rei)", 
+            rank: "Executive", 
+            description: "Executive Director / Designer overseeing creative direction, server aesthetics, and visual branding.",
             minecraftUsername: "ibeella",
-            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4M8 8H6M18 8H16M12 20L8 16H16L12 20Z" stroke="currentColor" fill="none"/><rect x="8" y="8" width="8" height="8" rx="2" stroke="currentColor" fill="none"/></svg>`
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" fill="none"/></svg>`,
+            rankClass: "rank-badge-executive"
+        },
+        { 
+            name: "WenjinTheFish", 
+            rank: "Helper", 
+            description: "Community Helper assisting players, answering questions, and keeping the server welcoming.",
+            minecraftUsername: "WenjinTheFish",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4M8 8H6M18 8H16M12 20L8 16H16L12 20Z" stroke="currentColor" fill="none"/><rect x="8" y="8" width="8" height="8" rx="2" stroke="currentColor" fill="none"/></svg>`,
+            rankClass: "rank-badge-helper"
+        },
+        { 
+            name: "thewarlwa1245", 
+            rank: "Tester", 
+            description: "Beta Tester ensuring new features and updates are bug-free before release.",
+            minecraftUsername: "thewarlwa1245",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6M12 9v6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" fill="none"/></svg>`,
+            rankClass: "rank-badge-tester"
+        },
+        { 
+            name: "SmileyOwen", 
+            rank: "Tester", 
+            description: "Beta Tester helping identify bugs and improve gameplay experience.",
+            minecraftUsername: "SmileyOwen",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6M12 9v6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" fill="none"/></svg>`,
+            rankClass: "rank-badge-tester"
         }
     ];
 
@@ -350,23 +399,11 @@
             const infoDiv = document.createElement('div');
             infoDiv.className = 'staff-info';
             
-            let rankClass = '';
-            let rankDisplay = '';
-            
-            if (staff.rank === 'Founder') {
-                rankClass = 'rank-badge-founder';
-                rankDisplay = `FOUNDER`;
-            } else if (staff.rank === 'Executive') {
-                rankClass = 'rank-badge-executive';
-                rankDisplay = `EXECUTIVE`;
-            } else {
-                rankClass = 'rank-badge-head';
-                rankDisplay = `HEAD MANAGEMENT`;
-            }
+            let rankDisplay = staff.rank.toUpperCase();
             
             infoDiv.innerHTML = `
                 <div class="staff-name">${staff.name}</div>
-                <div class="staff-rank ${rankClass}">
+                <div class="staff-rank ${staff.rankClass}">
                     ${staff.icon}
                     ${rankDisplay}
                 </div>
@@ -459,4 +496,4 @@
 </script>
 
 </body>
-  </html>
+            </html>
