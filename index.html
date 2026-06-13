@@ -28,30 +28,6 @@
     });
 </script>
 
-<!-- Theme script runs immediately to prevent flash -->
-<script>
-    (function() {
-        const savedTheme = localStorage.getItem('starveil-theme');
-        
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            document.body.classList.remove('light-mode');
-        } else if (savedTheme === 'light') {
-            document.body.classList.add('light-mode');
-            document.body.classList.remove('dark-mode');
-        } else {
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (systemPrefersDark) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('starveil-theme', 'dark');
-            } else {
-                document.body.classList.add('light-mode');
-                localStorage.setItem('starveil-theme', 'light');
-            }
-        }
-    })();
-</script>
-
 </head>
 <body>
 
@@ -80,12 +56,6 @@
                 <span></span>
                 <span></span>
             </div>
-            <button class="theme-toggle" id="themeToggleBtn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"/>
-                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                </svg>
-            </button>
         </div>
     </div>
 </nav>
@@ -280,54 +250,6 @@
 </footer>
 
 <script>
-    // Show loading screen on theme change for smooth transition
-    let themeChangeTimeout;
-    
-    const themeBtn = document.getElementById('themeToggleBtn');
-    const sunSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
-    const moonSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-
-    function updateButtonIcon() {
-        const isDark = document.body.classList.contains('dark-mode');
-        themeBtn.innerHTML = isDark ? sunSvg : moonSvg;
-    }
-
-    function setTheme(isDark) {
-        // Show loading screen
-        const loadingScreen = document.getElementById('loadingScreen');
-        if (loadingScreen) {
-            loadingScreen.classList.remove('hidden');
-        }
-        
-        // Apply theme after a tiny delay for smooth transition
-        clearTimeout(themeChangeTimeout);
-        themeChangeTimeout = setTimeout(() => {
-            if (isDark) {
-                document.body.classList.add('dark-mode');
-                document.body.classList.remove('light-mode');
-                localStorage.setItem('starveil-theme', 'dark');
-            } else {
-                document.body.classList.add('light-mode');
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('starveil-theme', 'light');
-            }
-            updateButtonIcon();
-            
-            // Hide loading screen after transition
-            setTimeout(() => {
-                if (loadingScreen) {
-                    loadingScreen.classList.add('hidden');
-                }
-            }, 400);
-        }, 50);
-    }
-    
-    updateButtonIcon();
-    
-    themeBtn.addEventListener('click', () => {
-        setTheme(!document.body.classList.contains('dark-mode'));
-    });
-
     // Mobile menu toggle
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.querySelector('.nav-links');
@@ -385,7 +307,7 @@
         setTimeout(() => glow.remove(), 700);
     }
     
-    document.querySelectorAll('.feature-card, .gallery-item, .btn, .theme-toggle, .social-links a, .footer-col a, .nav-links a, .faq-question, .menu-toggle, .community-card').forEach(el => {
+    document.querySelectorAll('.feature-card, .gallery-item, .btn, .social-links a, .footer-col a, .nav-links a, .faq-question, .menu-toggle, .community-card').forEach(el => {
         if (el) el.addEventListener('click', createGlow);
     });
 
@@ -405,4 +327,4 @@
 </script>
 
 </body>
-                        </html>
+                                                                                                                                                                     </html>
