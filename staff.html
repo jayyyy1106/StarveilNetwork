@@ -14,6 +14,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+</div>
+
+<script>
+    // Hide loading screen after page loads
+    window.addEventListener('load', function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        setTimeout(function() {
+            loadingScreen.classList.add('hidden');
+        }, 500);
+    });
+</script>
+
 <style>
 /* Staff page specific styles - Starveil Theme */
 :root{
@@ -496,4 +511,4 @@
 </script>
 
 </body>
-            </html>
+</html>
