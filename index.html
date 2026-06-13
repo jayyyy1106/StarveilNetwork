@@ -13,6 +13,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-spinner"></div>
+</div>
+
+<script>
+    // Hide loading screen after page loads
+    window.addEventListener('load', function() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        setTimeout(function() {
+            loadingScreen.classList.add('hidden');
+        }, 500);
+    });
+</script>
+
 <!-- Theme script runs immediately to prevent flash -->
 <script>
     (function() {
@@ -50,7 +65,7 @@
 <nav>
     <div class="nav-container">
         <div class="logo">
-            <img src="logo.png" alt="Starveil">
+            <img src="logo.png" alt="Starveil" onerror="this.style.display='none'">
             <span class="logo-text">STARVEIL</span>
         </div>
         <div class="nav-links">
@@ -80,7 +95,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-logo">
-                <img src="logo.png" alt="Starveil">
+                <img src="logo.png" alt="Starveil" onerror="this.style.display='none'">
             </div>
             <h1>✦ Starveil Network</h1>
             <p>A magical Minecraft experience where stars guide your path. Join a community of adventurers, builders, and legends.</p>
@@ -265,7 +280,9 @@
 </footer>
 
 <script>
-    // Theme toggle
+    // Show loading screen on theme change for smooth transition
+    let themeChangeTimeout;
+    
     const themeBtn = document.getElementById('themeToggleBtn');
     const sunSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
     const moonSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
@@ -276,16 +293,33 @@
     }
 
     function setTheme(isDark) {
-        if (isDark) {
-            document.body.classList.add('dark-mode');
-            document.body.classList.remove('light-mode');
-            localStorage.setItem('starveil-theme', 'dark');
-        } else {
-            document.body.classList.add('light-mode');
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('starveil-theme', 'light');
+        // Show loading screen
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.classList.remove('hidden');
         }
-        updateButtonIcon();
+        
+        // Apply theme after a tiny delay for smooth transition
+        clearTimeout(themeChangeTimeout);
+        themeChangeTimeout = setTimeout(() => {
+            if (isDark) {
+                document.body.classList.add('dark-mode');
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('starveil-theme', 'dark');
+            } else {
+                document.body.classList.add('light-mode');
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('starveil-theme', 'light');
+            }
+            updateButtonIcon();
+            
+            // Hide loading screen after transition
+            setTimeout(() => {
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 400);
+        }, 50);
     }
     
     updateButtonIcon();
@@ -371,4 +405,4 @@
 </script>
 
 </body>
-    </html>
+                        </html>
