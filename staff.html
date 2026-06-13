@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<title>Starveil Network | Leadership Team</title>
+
+<!-- favicon / tab icon -->
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="shortcut icon" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* Staff page specific styles - Starveil Theme */
+:root{
+    --rank-founder-start: #bea5d5;
+    --rank-founder-end: #9d7fbf;
+    --rank-executive-start: #9d7fbf;
+    --rank-executive-end: #776fa3;
+    --rank-head-start: #776fa3;
+    --rank-head-end: #536088;
+}
+
+.hero{
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 24px 60px;
+}
+
+.hero-content{
+    max-width: 1000px;
+}
+
+.hero h1{
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    background: var(--gradient-purple-light);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero p{
+    font-size: 1.1rem;
+    color: var(--text-soft);
+}
+
+.staff-section{
+    padding: 40px 24px 100px;
+}
+
+.container{
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.staff-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    justify-items: center;
+    align-items: start;
+}
+
+.staff-card{
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 32px;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.2, 0.95, 0.3, 1.05);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.staff-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px var(--shadow);
+}
+
+.head-container{
+    padding: 35px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-bubble{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    border: 2px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.2, 0.95, 0.3, 1.05);
+    box-shadow: 0 10px 30px var(--shadow);
+    overflow: hidden;
+}
+
+.head-bubble img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+/* Rank-specific bubble glows */
+.staff-card[data-rank="Founder"] .head-bubble{
+    box-shadow: 0 0 35px rgba(190,165,213,0.5);
+    border-color: #bea5d5;
+}
+
+.staff-card[data-rank="Executive"] .head-bubble{
+    box-shadow: 0 0 35px rgba(157,127,191,0.5);
+    border-color: #9d7fbf;
+}
+
+.staff-card[data-rank="Head Management"] .head-bubble{
+    box-shadow: 0 0 35px rgba(119,111,163,0.5);
+    border-color: #776fa3;
+}
+
+.staff-info{
+    padding: 20px 24px 32px;
+    text-align: center;
+}
+
+.staff-name{
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+    color: var(--text);
+}
+
+.staff-rank{
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rank-badge-founder{
+    background: linear-gradient(135deg, #bea5d5, #9d7fbf);
+    color: #1a1a2e;
+}
+.rank-badge-executive{
+    background: linear-gradient(135deg, #9d7fbf, #776fa3);
+    color: white;
+}
+.rank-badge-head{
+    background: linear-gradient(135deg, #776fa3, #536088);
+    color: white;
+}
+
+.rank-icon{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.staff-description{
+    font-size: 0.85rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+}
+
+/* Footer override for staff page */
+.cool-footer{
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .hero h1{
+        font-size: 2.5rem;
+    }
+    .hero p{
+        font-size: 1rem;
+    }
+    .staff-name{
+        font-size: 1.3rem;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<div class="glow-bg">
+    <div class="glow-sphere one"></div>
+    <div class="glow-sphere two"></div>
+    <div class="glow-sphere three"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">
+            <img src="logo.png" alt="Starveil">
+            <span class="logo-text">STARVEIL</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#gallery">Gallery</a>
+            <a href="index.html#faq">FAQ</a>
+            <a href="staff.html">Staff</a>
+            <a href="index.html#community">Community</a>
+        </div>
+        <div class="right-buttons">
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    <section class="hero fade-on-scroll">
+        <div class="hero-content">
+            <h1>✦ Leadership Team</h1>
+            <p>The dedicated individuals guiding Starveil Network to greatness.</p>
+        </div>
+    </section>
+
+    <section class="staff-section">
+        <div class="container">
+            <div class="staff-grid" id="staff-grid"></div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="cool-footer fade-on-scroll">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <h3>✦ STARVEIL</h3>
+            <p>Where every star tells a story. Join our celestial journey today.</p>
+            <div class="social-links">
+                <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+                <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg></a>
+                <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.3 9 4.5 0-2 .8-4 2.3-5.5 2-2 5.3-2 7.3 0z"/></svg></a>
+                <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M22 2L15 9M22 2l-7 7M22 2v6M15 9l-7-7M15 9L8 2M2 2l7 7M2 2h6M2 2v6M9 15l7 7M9 15l-7 7M9 15v6M16 16l6 6M16 16h6M16 16v6"/></svg></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="index.html">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#gallery">Gallery</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="staff.html">Staff</a>
+                <a href="index.html#community">Community</a>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <a href="#">Rules</a>
+                <a href="#">Support</a>
+                <a href="#">Status</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="#">Discord</a>
+                <a href="#">Store</a>
+                <a href="#">Vote</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">© 2026 Starveil Network — Where stars align and legends are born. ✦</div>
+</footer>
+
+<script>
+    // Staff Data with Minecraft usernames for 2D heads
+    const staffMembers = [
+        { 
+            name: "Ange1XDem0n", 
+            rank: "Founder", 
+            description: "Creator & Visionary behind Starveil Network. Leading the server with passion and dedication since day one.",
+            minecraftUsername: "Ange1XDem0n",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15 9H22L16 14L19 21L12 17L5 21L8 14L2 9H9L12 2Z"/></svg>`
+        },
+        { 
+            name: "its_apex", 
+            rank: "Executive", 
+            description: "Executive Director managing operations, community growth, and strategic partnerships.",
+            minecraftUsername: "atrillun",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>`
+        },
+        { 
+            name: "abwyss", 
+            rank: "Head Management", 
+            description: "Head of Management overseeing staff, player relations, and server quality assurance.",
+            minecraftUsername: "ibeella",
+            icon: `<svg class="rank-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6V4M8 8H6M18 8H16M12 20L8 16H16L12 20Z" stroke="currentColor" fill="none"/><rect x="8" y="8" width="8" height="8" rx="2" stroke="currentColor" fill="none"/></svg>`
+        }
+    ];
+
+    // Render staff cards with 2D Minecraft heads
+    function renderStaffCards() {
+        const grid = document.getElementById('staff-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        for (const staff of staffMembers) {
+            const card = document.createElement('div');
+            card.className = 'staff-card fade-on-scroll';
+            card.setAttribute('data-rank', staff.rank);
+            
+            const headContainer = document.createElement('div');
+            headContainer.className = 'head-container';
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'head-bubble';
+            
+            const headImg = document.createElement('img');
+            headImg.src = `https://mc-heads.net/avatar/${staff.minecraftUsername}/100`;
+            headImg.alt = `${staff.name}'s Minecraft head`;
+            headImg.loading = "lazy";
+            
+            headImg.onerror = function() {
+                this.src = `https://minotar.net/avatar/${staff.minecraftUsername}/100`;
+            };
+            
+            bubble.appendChild(headImg);
+            headContainer.appendChild(bubble);
+            
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'staff-info';
+            
+            let rankClass = '';
+            let rankDisplay = '';
+            
+            if (staff.rank === 'Founder') {
+                rankClass = 'rank-badge-founder';
+                rankDisplay = `FOUNDER`;
+            } else if (staff.rank === 'Executive') {
+                rankClass = 'rank-badge-executive';
+                rankDisplay = `EXECUTIVE`;
+            } else {
+                rankClass = 'rank-badge-head';
+                rankDisplay = `HEAD MANAGEMENT`;
+            }
+            
+            infoDiv.innerHTML = `
+                <div class="staff-name">${staff.name}</div>
+                <div class="staff-rank ${rankClass}">
+                    ${staff.icon}
+                    ${rankDisplay}
+                </div>
+                <div class="staff-description">${staff.description}</div>
+            `;
+            
+            card.appendChild(headContainer);
+            card.appendChild(infoDiv);
+            grid.appendChild(card);
+        }
+        
+        // Apply fade-on-scroll to new staff cards
+        const newFadeElements = document.querySelectorAll('.fade-on-scroll');
+        setTimeout(checkFadeIn, 50);
+    }
+    
+    renderStaffCards();
+
+    // Click glow effect
+    function createGlow(e) { 
+        let g = document.createElement('div'); 
+        g.className = 'click-glow'; 
+        g.style.left = e.clientX + 'px'; 
+        g.style.top = e.clientY + 'px'; 
+        document.body.appendChild(g); 
+        setTimeout(() => g.remove(), 700); 
+    }
+    
+    document.querySelectorAll('.glow-trigger, .btn, .social-links a, .footer-col a, .nav-links a, .staff-card, .menu-toggle').forEach(el => {
+        if (el) el.addEventListener('click', createGlow);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function openMenu() {
+        navLinks.classList.add('active');
+        menuToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navLinks.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                closeMenu();
+            }
+        }
+    });
+
+    // Fade on scroll
+    function checkFadeIn() {
+        const fadeElements = document.querySelectorAll('.fade-on-scroll');
+        fadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top < windowHeight - 80 && rect.bottom > 50) {
+                el.classList.add('fade-in-view');
+            } else {
+                el.classList.remove('fade-in-view');
+            }
+        });
+    }
+    
+    // Initial check and listen to scroll
+    setTimeout(checkFadeIn, 100);
+    window.addEventListener('scroll', checkFadeIn);
+    window.addEventListener('resize', checkFadeIn);
+</script>
+
+</body>
+  </html>
