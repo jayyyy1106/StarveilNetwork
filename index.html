@@ -28,6 +28,40 @@
     });
 </script>
 
+<style>
+/* Custom button styles for plushie icon */
+.play-now-btn {
+    position: relative;
+    overflow: visible !important;
+}
+
+.plushie-icon {
+    position: absolute;
+    top: -20px;
+    right: -15px;
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    transition: transform 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.play-now-btn:hover .plushie-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+@media (max-width: 768px) {
+    .plushie-icon {
+        width: 35px;
+        height: 35px;
+        top: -15px;
+        right: -12px;
+    }
+}
+</style>
+
 </head>
 <body>
 
@@ -37,7 +71,7 @@
     <div class="glow-sphere three"></div>
 </div>
 
-<!-- NAVBAR with Staff button -->
+<!-- NAVBAR -->
 <nav>
     <div class="nav-container">
         <div class="logo">
@@ -71,7 +105,8 @@
             <h1>✦ Starveil Network</h1>
             <p>A magical Minecraft experience where stars guide your path. Join a community of adventurers, builders, and legends.</p>
             <div class="btn-group">
-                <a href="#" class="btn btn-primary">
+                <a href="#" class="btn btn-primary play-now-btn">
+                    <img src="plushie.png" alt="Plushie" class="plushie-icon" onerror="this.style.display='none'">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     Play Now
                 </a>
@@ -329,4 +364,4 @@
 </script>
 
 </body>
-                                                                                                                                               </html>
+                    </html>
