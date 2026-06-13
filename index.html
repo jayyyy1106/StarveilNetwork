@@ -22,19 +22,23 @@
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark-mode');
             document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
         } else if (savedTheme === 'light') {
             document.documentElement.classList.remove('dark-mode');
             document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
         } else {
             // First time visitor - use system preference and SAVE it
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (systemPrefersDark) {
                 document.documentElement.classList.add('dark-mode');
                 document.body.classList.add('dark-mode');
+                document.body.classList.remove('light-mode');
                 localStorage.setItem('starveil-theme', 'dark');
             } else {
                 document.documentElement.classList.remove('dark-mode');
                 document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
                 localStorage.setItem('starveil-theme', 'light');
             }
         }
@@ -42,78 +46,123 @@
 </script>
 
 <style>
-/* Additional gradient overrides */
+/* Additional gradient overrides for the full sequence */
 :root {
     --bg-start: #ffffff;
     --bg-mid: #efe9f4;
     --bg-end: #dacfe8;
+    --gradient-step1: #cbb6de;
+    --gradient-step2: #bea5d5;
+    --gradient-step3: #a782c6;
+    --gradient-step4: #9d7fbf;
+    --gradient-step5: #8f7ab6;
+    --gradient-step6: #8676ad;
+    --gradient-step7: #776fa3;
+    --gradient-step8: #636895;
 }
 
 body.dark-mode {
     --bg-start: #2d475c;
     --bg-mid: #253d48;
     --bg-end: #182b2e;
+    --gradient-step1: #536088;
+    --gradient-step2: #455a7d;
+    --gradient-step3: #395472;
+    --gradient-step4: #334d66;
+    --gradient-step5: #2d475c;
+    --gradient-step6: #253d48;
+    --gradient-step7: #182b2e;
 }
 
-/* Gradient text overrides */
+body.light-mode {
+    --bg-start: #ffffff;
+    --bg-mid: #efe9f4;
+    --bg-end: #dacfe8;
+    --gradient-step1: #cbb6de;
+    --gradient-step2: #bea5d5;
+    --gradient-step3: #a782c6;
+    --gradient-step4: #9d7fbf;
+    --gradient-step5: #8f7ab6;
+    --gradient-step6: #8676ad;
+    --gradient-step7: #776fa3;
+    --gradient-step8: #636895;
+}
+
+/* Animated gradient background with full sequence */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, 
+        var(--bg-start) 0%,
+        var(--bg-mid) 8%,
+        var(--gradient-step1) 16%,
+        var(--gradient-step2) 24%,
+        var(--gradient-step3) 32%,
+        var(--gradient-step4) 40%,
+        var(--gradient-step5) 50%,
+        var(--gradient-step6) 60%,
+        var(--gradient-step7) 70%,
+        var(--gradient-step8) 80%,
+        var(--bg-end) 100%
+    );
+    background-size: 200% 200%;
+    z-index: -6;
+    transition: background 0.5s ease;
+    animation: gradientFlow 15s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating orbs with gradient colors */
+.glow-sphere.one {
+    background: var(--gradient-step2);
+}
+.glow-sphere.two {
+    background: var(--gradient-step4);
+}
+.glow-sphere.three {
+    background: var(--gradient-step6);
+}
+
+/* Text gradients using the sequence */
 .hero h1,
 .section-header h2,
 .footer-brand h3,
 .logo .logo-text {
-    background: linear-gradient(135deg, #bea5d5, #776fa3, #455a7d);
+    background: linear-gradient(135deg, var(--gradient-step2), var(--gradient-step4), var(--gradient-step7));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-body.dark-mode .hero h1,
-body.dark-mode .section-header h2,
-body.dark-mode .footer-brand h3,
-body.dark-mode .logo .logo-text {
-    background: linear-gradient(135deg, #cbb6de, #9d7fbf, #536088);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Feature icon gradients */
+/* Feature and icon gradients */
 .feature-icon,
 .community-icon,
-.wiki-category-icon {
-    background: linear-gradient(145deg, #bea5d5, #776fa3);
-}
-
-body.dark-mode .feature-icon,
-body.dark-mode .community-icon,
-body.dark-mode .wiki-category-icon {
-    background: linear-gradient(145deg, #9d7fbf, #536088);
-}
-
-/* Button gradients */
-.btn-primary {
-    background: linear-gradient(135deg, #bea5d5, #776fa3);
-}
-
-body.dark-mode .btn-primary {
-    background: linear-gradient(135deg, #9d7fbf, #536088);
-}
-
-/* Category button active */
+.wiki-category-icon,
+.social-links a,
+.btn-primary,
 .category-btn.active {
-    background: linear-gradient(135deg, #bea5d5, #776fa3);
+    background: linear-gradient(135deg, var(--gradient-step2), var(--gradient-step5));
 }
 
-body.dark-mode .category-btn.active {
-    background: linear-gradient(135deg, #9d7fbf, #536088);
+/* Hover effects */
+.nav-links a:hover,
+.footer-col a:hover {
+    color: var(--gradient-step3);
 }
 
-/* Social links gradient */
-.social-links a {
-    background: linear-gradient(135deg, #bea5d5, #776fa3);
+.community-card:hover {
+    border-color: var(--gradient-step3);
 }
 
-body.dark-mode .social-links a {
-    background: linear-gradient(135deg, #9d7fbf, #536088);
+.community-card span,
+.featured-btn {
+    color: var(--gradient-step4);
 }
 </style>
 
@@ -366,9 +415,11 @@ body.dark-mode .social-links a {
     function setTheme(isDark) {
         if (isDark) {
             document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
             localStorage.setItem('starveil-theme', 'dark');
         } else {
             document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
             localStorage.setItem('starveil-theme', 'light');
         }
         updateButtonIcon();
@@ -396,50 +447,4 @@ body.dark-mode .social-links a {
     function openMenu() {
         navLinks.classList.add('active');
         menuToggle.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    if (menuToggle) {
-        menuToggle.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (navLinks.classList.contains('active')) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
-    }
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-
-    // Close menu when clicking outside on mobile
-    document.addEventListener('click', (e) => {
-        if (window.innerWidth <= 768) {
-            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-                closeMenu();
-            }
-        }
-    });
-
-    // FAQ toggle
-    document.querySelectorAll('.faq-item').forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            item.classList.toggle('active');
-        });
-    });
-
-    // Click glow effect
-    function createGlow(e) {
-        const glow = document.createElement('div');
-        glow.className = 'click-glow';
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
-        document.body.appendChild(glow);
-        setTimeout(() => glow.remove(), 700);
-    }
-    
-    document.querySelectorAll('.feature-card, .gallery-item, .btn, .theme-toggle, .social-links a, .footer-col a, .nav-links a, .faq-question, .menu-toggle, .community-ca
+        do
